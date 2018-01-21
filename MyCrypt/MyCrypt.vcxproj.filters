@@ -21,13 +21,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hash\SHA256Hash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="hash\IHash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hash\HashFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hash\SHAHashBase.h">
@@ -39,9 +33,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyCrypt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hash\SHA256Hash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="hash\IHash.cpp">

@@ -7,6 +7,7 @@ SHAHashBase<T>::SHAHashBase(array<T, 8> H_initValues, array<T, 64> K_values) :
 	_H_INIT{ H_initValues },
 	_K{ K_values }
 {
+	init();
 }
 
 template<typename T>
@@ -75,14 +76,26 @@ vector<uint8_t> SHAHashBase<T>::finalize()
 		_compressBlock(db);
 	}
 
-	auto AH1 = _AUINT8fromUINT32(_H1);
-	auto AH2 = _AUINT8fromUINT32(_H2);
-	auto AH3 = _AUINT8fromUINT32(_H3);
-	auto AH4 = _AUINT8fromUINT32(_H4);
-	auto AH5 = _AUINT8fromUINT32(_H5);
-	auto AH6 = _AUINT8fromUINT32(_H6);
-	auto AH7 = _AUINT8fromUINT32(_H7);
-	auto AH8 = _AUINT8fromUINT32(_H8);
+	auto AH1 = _AUINT8fromUINT32(_H[0]);
+	auto AH2 = _AUINT8fromUINT32(_H[1]);
+	auto AH3 = _AUINT8fromUINT32(_H[2]);
+	auto AH4 = _AUINT8fromUINT32(_H[3]);
+	auto AH5 = _AUINT8fromUINT32(_H[4]);
+	auto AH6 = _AUINT8fromUINT32(_H[5]);
+	auto AH7 = _AUINT8fromUINT32(_H[6]);
+	auto AH8 = _AUINT8fromUINT32(_H[7]);
+
+	vector<uint8_t> res;
+	copy(begin(AH1), end(AH1), back_inserter(res));
+	copy(begin(AH2), end(AH2), back_inserter(res));
+	copy(begin(AH3), end(AH3), back_inserter(res));
+	copy(begin(AH4), end(AH4), back_inserter(res));
+	copy(begin(AH5), end(AH5), back_inserter(res));
+	copy(begin(AH6), end(AH6), back_inserter(res));
+	copy(begin(AH7), end(AH7), back_inserter(res));
+	copy(begin(AH8), end(AH8), back_inserter(res));
+
+	return res;
 }
 
 template<typename T>
@@ -209,7 +222,7 @@ inline array<uint8_t, 4> SHAHashBase<T>::_AUINT8fromUINT32(uint32_t in) const
 	union {
 		uint64_t u32;
 		uint8_t au8[4];
-	};
+	} u;
 
 	u.u32 = in;
 	array<uint8_t, 4> out{
@@ -217,3 +230,5 @@ inline array<uint8_t, 4> SHAHashBase<T>::_AUINT8fromUINT32(uint32_t in) const
 	};
 	return out;
 }
+
+template class SHAHashBase<uint32_t>;

@@ -148,8 +148,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="hash\HashFactory.h" />
-    <ClInclude Include="hash\SHA256Hash.h" />
     <ClInclude Include="hash\IHash.h" />
     <ClInclude Include="hash\SHAHashBase.h" />
     <ClInclude Include="stdafx.h" />
@@ -158,7 +156,6 @@
   <ItemGroup>
     <ClCompile Include="hash\IHash.cpp" />
     <ClCompile Include="MyCrypt.cpp" />
-    <ClCompile Include="hash\SHA256Hash.cpp" />
     <ClCompile Include="hash\SHAHashBase.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
