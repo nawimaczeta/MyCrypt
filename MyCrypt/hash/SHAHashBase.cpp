@@ -2,16 +2,16 @@
 
 #include <algorithm>
 
-template<typename T>
-SHAHashBase<T>::SHAHashBase(array<T, 8> H_initValues, array<T, 64> K_values) :
+template<typename T, uint32_t HashSizeBytes>
+SHAHashBase<T, HashSizeBytes>::SHAHashBase(array<T, 8> H_initValues, array<T, 64> K_values) :
 	_H_INIT{ H_initValues },
 	_K{ K_values }
 {
 	init();
 }
 
-template<typename T>
-void SHAHashBase<T>::init()
+template<typename T, uint32_t HashSizeBytes>
+void SHAHashBase<T, HashSizeBytes>::init()
 {
 	copy(begin(_H_INIT), end(_H_INIT), begin(_H));
 
@@ -22,8 +22,8 @@ void SHAHashBase<T>::init()
 	_dataLength = 0;
 }
 
-template<typename T>
-void SHAHashBase<T>::processData(vector<uint8_t>& data)
+template<typename T, uint32_t HashSizeBytes>
+void SHAHashBase<T, HashSizeBytes>::processData(vector<uint8_t>& data)
 {
 	_dataLength += data.size() * 8;	// in bytes
 
@@ -41,8 +41,8 @@ void SHAHashBase<T>::processData(vector<uint8_t>& data)
 	}
 }
 
-template<typename T>
-vector<uint8_t> SHAHashBase<T>::finalize()
+template<typename T, uint32_t HashSizeBytes>
+vector<uint8_t> SHAHashBase<T, HashSizeBytes>::finalize()
 {
 	// append bit 1
 	_dataQueue.push(0x80);
@@ -76,30 +76,17 @@ vector<uint8_t> SHAHashBase<T>::finalize()
 		_compressBlock(db);
 	}
 
-	auto AH1 = _AUINT8fromUINT32(_H[0]);
-	auto AH2 = _AUINT8fromUINT32(_H[1]);
-	auto AH3 = _AUINT8fromUINT32(_H[2]);
-	auto AH4 = _AUINT8fromUINT32(_H[3]);
-	auto AH5 = _AUINT8fromUINT32(_H[4]);
-	auto AH6 = _AUINT8fromUINT32(_H[5]);
-	auto AH7 = _AUINT8fromUINT32(_H[6]);
-	auto AH8 = _AUINT8fromUINT32(_H[7]);
-
 	vector<uint8_t> res;
-	copy(begin(AH1), end(AH1), back_inserter(res));
-	copy(begin(AH2), end(AH2), back_inserter(res));
-	copy(begin(AH3), end(AH3), back_inserter(res));
-	copy(begin(AH4), end(AH4), back_inserter(res));
-	copy(begin(AH5), end(AH5), back_inserter(res));
-	copy(begin(AH6), end(AH6), back_inserter(res));
-	copy(begin(AH7), end(AH7), back_inserter(res));
-	copy(begin(AH8), end(AH8), back_inserter(res));
+	for (int i = 0; i < HashSizeBytes; i++) {
+		auto ah = _AUINT8fromUINT32(_H[i]);
+		copy(begin(ah), end(ah), back_inserter(res));
+	}
 
 	return res;
 }
 
-template<typename T>
-void SHAHashBase<T>::_compressBlock(DataBlock & dataBlock)
+template<typename T, uint32_t HashSizeBytes>
+void SHAHashBase<T, HashSizeBytes>::_compressBlock(DataBlock & dataBlock)
 {
 	uint32_t a = _H[0];
 	uint32_t b = _H[1];
@@ -143,56 +130,56 @@ void SHAHashBase<T>::_compressBlock(DataBlock & dataBlock)
 	_H[7] += h;
 }
 
-template<typename T>
-inline T SHAHashBase<T>::_SHA256_Ch(T x, T y, T z) const
+template<typename T, uint32_t HashSizeBytes>
+inline T SHAHashBase<T, HashSizeBytes>::_SHA256_Ch(T x, T y, T z) const
 {
 	return (x & y) ^ (~x & z);
 }
 
-template<typename T>
-inline T SHAHashBase<T>::_SHA256_Maj(T x, T y, T z) const
+template<typename T, uint32_t HashSizeBytes>
+inline T SHAHashBase<T, HashSizeBytes>::_SHA256_Maj(T x, T y, T z) const
 {
 	return (x & y) ^ (x & z) ^ (y & z);
 }
 
-template<typename T>
-inline T SHAHashBase<T>::_SHA256_Sigma0(T x) const
+template<typename T, uint32_t HashSizeBytes>
+inline T SHAHashBase<T, HashSizeBytes>::_SHA256_Sigma0(T x) const
 {
 	return _S(x, 2) ^ _S(x, 13) ^ _S(x, 22);
 }
 
-template<typename T>
-inline T SHAHashBase<T>::_SHA256_Sigma1(T x) const
+template<typename T, uint32_t HashSizeBytes>
+inline T SHAHashBase<T, HashSizeBytes>::_SHA256_Sigma1(T x) const
 {
 	return _S(x, 6) ^ _S(x, 11) ^ _S(x, 25);
 }
 
-template<typename T>
-inline T SHAHashBase<T>::_SHA256_sigma0(T x) const
+template<typename T, uint32_t HashSizeBytes>
+inline T SHAHashBase<T, HashSizeBytes>::_SHA256_sigma0(T x) const
 {
 	return _S(x, 7) ^ _S(x, 18) ^ _R(x, 3);
 }
 
-template<typename T>
-inline T SHAHashBase<T>::_SHA256_sigma1(T x) const
+template<typename T, uint32_t HashSizeBytes>
+inline T SHAHashBase<T, HashSizeBytes>::_SHA256_sigma1(T x) const
 {
 	return _S(x, 17) ^ _S(x, 19) ^ _R(x, 10);
 }
 
-template<typename T>
-inline T SHAHashBase<T>::_R(T x, T n) const
+template<typename T, uint32_t HashSizeBytes>
+inline T SHAHashBase<T, HashSizeBytes>::_R(T x, T n) const
 {
 	return x >> n;
 }
 
-template<typename T>
-inline T SHAHashBase<T>::_S(T x, T n) const
+template<typename T, uint32_t HashSizeBytes>
+inline T SHAHashBase<T, HashSizeBytes>::_S(T x, T n) const
 {
 	return x >> n | x << (32 - n);
 }
 
-template<typename T>
-inline array<uint8_t, 8> SHAHashBase<T>::_AUINT8fromUINT64(uint64_t in) const
+template<typename T, uint32_t HashSizeBytes>
+inline array<uint8_t, 8> SHAHashBase<T, HashSizeBytes>::_AUINT8fromUINT64(uint64_t in) const
 {
 	union {
 		uint64_t u64;
@@ -207,8 +194,8 @@ inline array<uint8_t, 8> SHAHashBase<T>::_AUINT8fromUINT64(uint64_t in) const
 	return out;
 }
 
-template<typename T>
-inline uint32_t SHAHashBase<T>::_UINT32fromAUINT8(array<uint8_t, 4> in) const
+template<typename T, uint32_t HashSizeBytes>
+inline uint32_t SHAHashBase<T, HashSizeBytes>::_UINT32fromAUINT8(array<uint8_t, 4> in) const
 {
 	return (uint32_t)(in[0] << 24) |
 		(uint32_t)(in[1] << 16) |
@@ -216,8 +203,8 @@ inline uint32_t SHAHashBase<T>::_UINT32fromAUINT8(array<uint8_t, 4> in) const
 		(uint32_t)in[3];
 }
 
-template<typename T>
-inline array<uint8_t, 4> SHAHashBase<T>::_AUINT8fromUINT32(uint32_t in) const
+template<typename T, uint32_t HashSizeBytes>
+inline array<uint8_t, 4> SHAHashBase<T, HashSizeBytes>::_AUINT8fromUINT32(uint32_t in) const
 {
 	union {
 		uint64_t u32;
@@ -231,4 +218,5 @@ inline array<uint8_t, 4> SHAHashBase<T>::_AUINT8fromUINT32(uint32_t in) const
 	return out;
 }
 
-template class SHAHashBase<uint32_t>;
+template class SHAHashBase<uint32_t, 8>;
+template class SHAHashBase<uint32_t, 7>;
