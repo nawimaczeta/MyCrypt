@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyCrypt", "MyCrypt\MyCrypt.vcxproj", "{BA6942D8-C9B8-4970-BA78-2B76E08DD506}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GTestLib", "GTestLib\GTestLib.vcxproj", "{E1B50C85-720E-4A42-A47B-B16C43C23BEF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyCryptTest", "MyCryptTest\MyCryptTest.vcxproj", "{44CE0FCB-FBBE-4E55-B824-ECC32F7E4C0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,22 @@ Global
 		{BA6942D8-C9B8-4970-BA78-2B76E08DD506}.Release|x64.Build.0 = Release|x64
 		{BA6942D8-C9B8-4970-BA78-2B76E08DD506}.Release|x86.ActiveCfg = Release|Win32
 		{BA6942D8-C9B8-4970-BA78-2B76E08DD506}.Release|x86.Build.0 = Release|Win32
+		{E1B50C85-720E-4A42-A47B-B16C43C23BEF}.Debug|x64.ActiveCfg = Debug|x64
+		{E1B50C85-720E-4A42-A47B-B16C43C23BEF}.Debug|x64.Build.0 = Debug|x64
+		{E1B50C85-720E-4A42-A47B-B16C43C23BEF}.Debug|x86.ActiveCfg = Debug|Win32
+		{E1B50C85-720E-4A42-A47B-B16C43C23BEF}.Debug|x86.Build.0 = Debug|Win32
+		{E1B50C85-720E-4A42-A47B-B16C43C23BEF}.Release|x64.ActiveCfg = Release|x64
+		{E1B50C85-720E-4A42-A47B-B16C43C23BEF}.Release|x64.Build.0 = Release|x64
+		{E1B50C85-720E-4A42-A47B-B16C43C23BEF}.Release|x86.ActiveCfg = Release|Win32
+		{E1B50C85-720E-4A42-A47B-B16C43C23BEF}.Release|x86.Build.0 = Release|Win32
+		{44CE0FCB-FBBE-4E55-B824-ECC32F7E4C0F}.Debug|x64.ActiveCfg = Debug|x64
+		{44CE0FCB-FBBE-4E55-B824-ECC32F7E4C0F}.Debug|x64.Build.0 = Debug|x64
+		{44CE0FCB-FBBE-4E55-B824-ECC32F7E4C0F}.Debug|x86.ActiveCfg = Debug|Win32
+		{44CE0FCB-FBBE-4E55-B824-ECC32F7E4C0F}.Debug|x86.Build.0 = Debug|Win32
+		{44CE0FCB-FBBE-4E55-B824-ECC32F7E4C0F}.Release|x64.ActiveCfg = Release|x64
+		{44CE0FCB-FBBE-4E55-B824-ECC32F7E4C0F}.Release|x64.Build.0 = Release|x64
+		{44CE0FCB-FBBE-4E55-B824-ECC32F7E4C0F}.Release|x86.ActiveCfg = Release|Win32
+		{44CE0FCB-FBBE-4E55-B824-ECC32F7E4C0F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
