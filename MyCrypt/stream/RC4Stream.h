@@ -8,7 +8,6 @@ class RC4Stream :
 public:
 	virtual void setKey(Bytes & key) override;
 	virtual void setIV(Bytes & IV) override;
-	virtual void processBuffer(Bytes & buffer) override;
 	virtual void processBuffer(const Bytes & input, Bytes & output) override;
 
 private:

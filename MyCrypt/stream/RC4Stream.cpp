@@ -21,10 +21,6 @@ void RC4Stream::setIV(Bytes & IV) {
 	// Not needed by RC4
 }
 
-void RC4Stream::processBuffer(Bytes & buffer) {
-	processBuffer(buffer, buffer);
-}
-
 void RC4Stream::processBuffer(const Bytes & input, Bytes & output)
 {
 	auto io = begin(output);
