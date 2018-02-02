@@ -27,18 +27,30 @@
     <ClInclude Include="hash\SHAHash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="stream\IStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stream\RC4Stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyCrypt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MyCrypt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="hash\IHash.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="hash\SHAHash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stream\RC4Stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCrypt.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
