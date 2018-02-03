@@ -21,7 +21,13 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StreamTests\RC4Tests\RC4_TestVector.h">
+    <ClInclude Include="TestVector\ITestVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestVector\SimpleTestVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestVector\RCF6229TestVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

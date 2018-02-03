@@ -1,23 +1,25 @@
 #pragma once
 
 #include <vector>
-#include <utility>
-#include "MyCrypt.h"
 
-class RC4_TestVector {
+#include "ITestVector.h"
+
+class RCF6229TestVector	
+	: public ITestVector {
 public:
-	RC4_TestVector(uint32_t inputSize, Bytes key, vector<uint32_t> offsets, vector<uint8_t> outputStream) :
+	RCF6229TestVector(uint32_t inputSize, Bytes key, vector<uint32_t> offsets, vector<uint8_t> outputStream) :
 		_inputSize{ inputSize }, _key{ key }, _offsets{ offsets }, _outputStream{ outputStream } {}
 
-	Bytes getKey() const {
+	virtual Bytes getKey() const {
 		return _key;
 	}
 
-	uint32_t getInputSize() const {
-		return _inputSize;
+	virtual Bytes getInputData() const {
+		Bytes res(_inputSize);
+		return res;
 	}
 
-	bool validateOutput(Bytes & output) {
+	virtual bool validateOutput(Bytes & output) {
 		vector<uint8_t> vectorChunks;
 		for (auto offset : _offsets) {
 			copy_n(begin(output) + offset, CHUNK_SIZE, back_inserter(vectorChunks));

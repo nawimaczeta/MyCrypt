@@ -2,18 +2,45 @@
 
 #include "gtest/gtest.h"
 #include "stream/RC4Stream.h"
-#include "RC4_TestVector.h"
+#include "TestVector/SimpleTestVector.h"
+#include "TestVector/RCF6229TestVector.h"
 
 using namespace std;
 
 class RC4_Test :
-	public ::testing::TestWithParam<RC4_TestVector *> 
+	public ::testing::TestWithParam<ITestVector *> 
 {
 protected:
 	RC4Stream _sut;
 };
 
-static RC4_TestVector testVector1{
+/*
+Test vectors from Wikipedia
+*/
+static SimpleTestVector RC4_WikiVector1{
+	{ 'K', 'e', 'y' },											// key
+	{ 'P', 'l', 'a', 'i', 'n', 't', 'e', 'x', 't' },			// input stream
+	{ 0xBB, 0xF3, 0x16, 0xE8, 0xD9, 0x40, 0xAF, 0x0A, 0xD3 }	// output stream
+};
+
+static SimpleTestVector RC4_WikiVector2{
+	{ 'W', 'i', 'k', 'i' },										// key
+	{ 'p', 'e', 'd', 'i', 'a' },								// input stream
+	{ 0x10, 0x21, 0xBF, 0x04, 0x20 }							// output stream
+};
+static SimpleTestVector RC4_WikiVector3{
+	{ 'S', 'e', 'c', 'r', 'e', 't' },							// key
+	{ 'A', 't', 't', 'a', 'c', 'k', ' ', 'a', 't', ' ', 'd', 'a', 'w', 'n' },	// input stream
+	{ 															// output stream
+		0x45, 0xA0, 0x1F, 0x64, 0x5F, 0xC3, 0x5B, 0x38, 
+		0x35, 0x52, 0x54, 0x4B, 0x9B, 0xF5 
+	}	
+};
+
+/*
+Test vectors from RFC6229
+*/
+static RCF6229TestVector testVector1{
 	{ 4112 },											// size of input data
 	{ 0x01, 0x02, 0x03, 0x04, 0x05 },					// key
 	{ 0, 240, 496, 752, 1008, 1520, 2032, 3056, 4080 },	// offsets
@@ -39,7 +66,7 @@ static RC4_TestVector testVector1{
 	}
 };
 
-static RC4_TestVector testVector2{
+static RCF6229TestVector testVector2{
 	{ 4112 },											// size of input data
 	{ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07 },		// key
 	{ 0, 240, 496, 752, 1008, 1520, 2032, 3056, 4080 },	// offsets
@@ -65,7 +92,7 @@ static RC4_TestVector testVector2{
 	}
 };
 
-static RC4_TestVector testVector3{
+static RCF6229TestVector testVector3{
 	{ 4112 },											// size of input data
 	{ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08 },	// key
 	{ 0, 240, 496, 752, 1008, 1520, 2032, 3056, 4080 },	// offsets
@@ -91,7 +118,7 @@ static RC4_TestVector testVector3{
 	}
 };
 
-static RC4_TestVector testVector4{
+static RCF6229TestVector testVector4{
 	{ 4112 },											// size of input data
 	{ 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a },	// key
 	{ 0, 240, 496, 752, 1008, 1520, 2032, 3056, 4080 },	// offsets
@@ -117,7 +144,7 @@ static RC4_TestVector testVector4{
 	}
 };
 
-static RC4_TestVector testVector5{
+static RCF6229TestVector testVector5{
 	{ 4112 },											// size of input data
 	{ 
 		0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 
@@ -145,7 +172,7 @@ static RC4_TestVector testVector5{
 	}
 };
 
-static RC4_TestVector testVector6{
+static RCF6229TestVector testVector6{
 	{ 4112 },											// size of input data
 	{ 
 		0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 
@@ -174,7 +201,7 @@ static RC4_TestVector testVector6{
 	}
 };
 
-static RC4_TestVector testVector7{
+static RCF6229TestVector testVector7{
 	{ 4112 },												// size of input data
 	{ 
 		0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 
@@ -204,7 +231,7 @@ static RC4_TestVector testVector7{
 	}
 };
 
-static RC4_TestVector testVector8{
+static RCF6229TestVector testVector8{
 	{ 4112 },											// size of input data
 	{ 0x83, 0x32, 0x22, 0x77, 0x2a },					// key
 	{ 0, 240, 496, 752, 1008, 1520, 2032, 3056, 4080 },	// offsets
@@ -230,7 +257,7 @@ static RC4_TestVector testVector8{
 	}
 };
 
-static RC4_TestVector testVector9{
+static RCF6229TestVector testVector9{
 	{ 4112 },											// size of input data
 	{ 0x19, 0x10, 0x83, 0x32, 0x22, 0x77, 0x2a },		// key
 	{ 0, 240, 496, 752, 1008, 1520, 2032, 3056, 4080 },	// offsets
@@ -256,7 +283,7 @@ static RC4_TestVector testVector9{
 	}
 };
 
-static RC4_TestVector testVector10{
+static RCF6229TestVector testVector10{
 	{ 4112 },											// size of input data
 	{ 0x64, 0x19, 0x10, 0x83, 0x32, 0x22, 0x77, 0x2a },	// key
 	{ 0, 240, 496, 752, 1008, 1520, 2032, 3056, 4080 },	// offsets
@@ -282,7 +309,7 @@ static RC4_TestVector testVector10{
 	}
 };
 
-static RC4_TestVector testVector11{
+static RCF6229TestVector testVector11{
 	{ 4112 },											// size of input data
 	{ 0x8b, 0x37, 0x64, 0x19, 0x10, 0x83, 0x32, 0x22, 0x77, 0x2a },	// key
 	{ 0, 240, 496, 752, 1008, 1520, 2032, 3056, 4080 },	// offsets
@@ -308,7 +335,7 @@ static RC4_TestVector testVector11{
 	}
 };
 
-static RC4_TestVector testVector12{
+static RCF6229TestVector testVector12{
 	{ 4112 },											// size of input data
 	{
 		0xeb, 0xb4, 0x62, 0x27, 0xc6, 0xcc, 0x8b, 0x37,
@@ -336,7 +363,7 @@ static RC4_TestVector testVector12{
 	}
 };
 
-static RC4_TestVector testVector13{
+static RCF6229TestVector testVector13{
 	{ 4112 },											// size of input data
 	{ 
 		0xc1, 0x09, 0x16, 0x39, 0x08, 0xeb, 0xe5, 0x1d, 
@@ -365,7 +392,7 @@ static RC4_TestVector testVector13{
 	}
 };
 
-static RC4_TestVector testVector14{
+static RCF6229TestVector testVector14{
 	{ 4112 },											// size of input data
 	{ 
 		0x1a, 0xda, 0x31, 0xd5, 0xcf, 0x68, 0x82, 0x21, 
@@ -413,53 +440,21 @@ INSTANTIATE_TEST_CASE_P(RFC6229_Vectors, RC4_Test, ::testing::Values(
 	&testVector14
 ));
 
+INSTANTIATE_TEST_CASE_P(Wikipedia_Vectors, RC4_Test, ::testing::Values(
+	&RC4_WikiVector1,
+	&RC4_WikiVector2,
+	&RC4_WikiVector3
+));
+
 TEST_P(RC4_Test, Test_with_vectors) {
-	RC4_TestVector * tv = GetParam();
-	Bytes key = tv->getKey();
-	Bytes input(tv->getInputSize());
-	Bytes output(tv->getInputSize());
-
-	_sut.setKey(key);
-	_sut.processBuffer(input, output);
-	bool outputCorrect = tv->validateOutput(output);
-	ASSERT_TRUE(outputCorrect);
-}
-
-TEST_F(RC4_Test, Wikipedia_vector_1) {
-	Bytes key{ 'K', 'e', 'y' };
-	Bytes input{ 'P', 'l', 'a', 'i', 'n', 't', 'e', 'x', 't' };
-	Bytes expectedOutput{ 0xBB, 0xF3, 0x16, 0xE8, 0xD9, 0x40, 0xAF, 0x0A, 0xD3 };
+	ITestVector *testVector = GetParam();
+	Bytes key = testVector->getKey();
+	Bytes input = testVector->getInputData();
 	Bytes output(input.size());
 
 	_sut.setKey(key);
 	_sut.processBuffer(input, output);
 	
-	bool outputCorrect = output == expectedOutput;
-	ASSERT_TRUE(outputCorrect);
-}
-
-TEST_F(RC4_Test, Wikipedia_vector_2) {
-	Bytes key{ 'W', 'i', 'k', 'i' };
-	Bytes input{ 'p', 'e', 'd', 'i', 'a' };
-	Bytes expectedOutput{ 0x10, 0x21, 0xBF, 0x04, 0x20 };
-	Bytes output(input.size());
-
-	_sut.setKey(key);
-	_sut.processBuffer(input, output);
-
-	bool outputCorrect = output == expectedOutput;
-	ASSERT_TRUE(outputCorrect);
-}
-
-TEST_F(RC4_Test, Wikipedia_vector_3) {
-	Bytes key{ 'S', 'e', 'c', 'r', 'e', 't' };
-	Bytes input{ 'A', 't', 't', 'a', 'c', 'k', ' ', 'a', 't', ' ', 'd', 'a', 'w', 'n' };
-	Bytes expectedOutput{ 0x45, 0xA0, 0x1F, 0x64, 0x5F, 0xC3, 0x5B, 0x38, 0x35, 0x52, 0x54, 0x4B, 0x9B, 0xF5 };
-	Bytes output(input.size());
-
-	_sut.setKey(key);
-	_sut.processBuffer(input, output);
-
-	bool outputCorrect = output == expectedOutput;
+	bool outputCorrect = testVector->validateOutput(output);
 	ASSERT_TRUE(outputCorrect);
 }

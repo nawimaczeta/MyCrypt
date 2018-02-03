@@ -72,20 +72,20 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest\include;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest;F:\users\Projects\VS2017\MyCrypt\MyCrypt;$(IncludePath)</IncludePath>
+    <IncludePath>F:\users\Projects\VS2017\MyCrypt\MyCryptTest;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest\include;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest;F:\users\Projects\VS2017\MyCrypt\MyCrypt;$(IncludePath)</IncludePath>
     <LibraryPath>F:\users\Projects\VS2017\MyCrypt\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest\include;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest;F:\users\Projects\VS2017\MyCrypt\MyCrypt;$(IncludePath)</IncludePath>
+    <IncludePath>F:\users\Projects\VS2017\MyCrypt\MyCryptTest;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest\include;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest;F:\users\Projects\VS2017\MyCrypt\MyCrypt;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest\include;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest;F:\users\Projects\VS2017\MyCrypt\MyCrypt;$(IncludePath)</IncludePath>
+    <IncludePath>F:\users\Projects\VS2017\MyCrypt\MyCryptTest;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest\include;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest;F:\users\Projects\VS2017\MyCrypt\MyCrypt;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest\include;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest;F:\users\Projects\VS2017\MyCrypt\MyCrypt;$(IncludePath)</IncludePath>
+    <IncludePath>F:\users\Projects\VS2017\MyCrypt\MyCryptTest;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest\include;F:\users\Projects\VS2017\MyCrypt\GTestLib\googletest\googletest;F:\users\Projects\VS2017\MyCrypt\MyCrypt;$(IncludePath)</IncludePath>
     <LibraryPath>F:\users\Projects\VS2017\MyCrypt\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -155,8 +155,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TestVector\SimpleTestVector.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="StreamTests\RC4Tests\RC4_TestVector.h" />
+    <ClInclude Include="TestVector\ITestVector.h" />
+    <ClInclude Include="TestVector\RCF6229TestVector.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>

@@ -5,4 +5,5 @@
 
 using namespace std;
 
-typedef vector<uint8_t> Bytes;
+typedef uint8_t Byte;
+typedef vector<Byte> Bytes;
